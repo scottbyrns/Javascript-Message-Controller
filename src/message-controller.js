@@ -1,5 +1,9 @@
 (function (className, namespace) {
-	namespace = namespace || window;	/**
+	if (typeof namespace == 'string' && !window[namespace]) {
+		window[namespace] = {};
+	}
+	namespace = namespace || 'window';
+	/**
 	 * Message controller constructor.
 	 * @returns {MessageController} instance
 	 */
@@ -83,6 +87,6 @@
 		}
 	};
 	
-	window[className]  = new MessageController();
+	window[namespace][className] = new MessageController();
 	
-})('MessageController', 'SB');
+})('MessageController', 'BYRNS');
