@@ -1,5 +1,5 @@
-(function (className) {
-	/**
+(function (className, namespace) {
+	namespace = namespace || window;	/**
 	 * Message controller constructor.
 	 * @returns {MessageController} instance
 	 */
@@ -85,4 +85,4 @@
 	
 	window[className]  = new MessageController();
 	
-})('MessageController');
+})('MessageController', 'SB');
