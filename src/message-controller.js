@@ -1,3 +1,4 @@
+
 (function (className) {
 	var MessageController = function () {
 		this.messagePool = {};
