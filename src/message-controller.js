@@ -1,10 +1,30 @@
-
 (function (className) {
+	/**
+	 * Message controller constructor.
+	 * @returns {MessageController} instance
+	 */
 	var MessageController = function () {
+		/**
+		 * Object to store the message handlers.
+		 * @property
+		 */
 		this.messagePool = {};
+		/**
+		 * Unique ID counter
+		 * @property
+		 */
 		this.currentUID = 0;
 	};
+	/**
+	 * Prototype of the MessageController class
+	 * @prototype
+	 */
 	MessageController.prototype = {
+		/**
+		 * Add an event listener
+		 * @param {String} group Listener group to add the callback to.
+		 * @param {Function} callback callback to register to a listener group.
+		 */
 		addListener: function (group, callback) {
 			this.currentUID += 1;
 			var listener = {
@@ -12,12 +32,12 @@
 				UID: this.currentUID,
 				sendMessage: (function (that) {
 					return function (message, channel) {
-						that.sendMessage(this.group, message, channel);
+						return that.sendMessage(this.group, message, channel);
 					};
 				})(this),
 				destroy: (function (that) {
 					return function () {
-						that.removeListener(this);
+						return that.removeListener(this);
 					};
 				})(this)
 			};
@@ -26,12 +46,23 @@
 			this.messagePool[group][listener.UID] = callback;
 			return listener;
 		},
+		/**
+		 * Remove a registered callback
+		 * @param {Listener} listener Listener resource object
+		 */
 		removeListener: function (listener) {
 			try {
 				delete this.messagePool[listener.group][listener.UID];
 			}
 			catch (e) {}
 		},
+		/**
+		 * Send a message to a listener group.
+		 * @param {String} group Listener group reference by name
+		 * @param {Any} message Message to be send to the specified listener group
+		 * @param {String} channel Message channel to allow listener callback to filter messages
+		 * targeted at specific listeners.
+		 */
 		sendMessage: function (group, message, channel) {
 			var messageGroup = this.messagePool[group],
 			exceptions = [];
@@ -51,5 +82,7 @@
 			return exceptions;
 		}
 	};
-	window[className] = new MessageController();
+	
+	window[className]  = new MessageController();
+	
 })('MessageController');
