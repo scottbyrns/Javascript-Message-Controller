@@ -2,6 +2,9 @@
 	if (typeof namespace == 'string' && !window[namespace]) {
 		window[namespace] = {};
 	}
+	else if (typeof namespace == 'string' && window[namespace] && typeof className == 'string' && window[namespace][className]) {
+		return;
+	}
 	namespace = namespace || 'window';
 	/**
 	 * Message controller constructor.
@@ -45,7 +48,7 @@
 					};
 				})(this)
 			};
-			
+
 			this.messagePool[group] = this.messagePool[group] || {};
 			this.messagePool[group][listener.UID] = callback;
 			return listener;
@@ -86,7 +89,7 @@
 			return exceptions;
 		}
 	};
-	
+
 	window[namespace][className] = new MessageController();
-	
-})('MessageController', 'BYRNS');
+
+})('MessageController', 'Foundation');
