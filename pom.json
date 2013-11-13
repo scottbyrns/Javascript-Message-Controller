@@ -1,0 +1,25 @@
+{
+	
+	"name": "Message Controller",
+	"description": "Simple publisher/subscriber messaging library for passing first class objects to registered callbacks.",
+	"groupId": "com.scottbyrns",
+	"artifactId": "MessageController",
+	"version": "1.0.0-SNAPSHOT",
+	
+	"developers": [
+		{
+			"name":"Scott Byrns"
+		}
+	],
+	
+	"dependencies": [
+
+	],
+	"sources": [
+		"MessageController.js"
+	],
+	"configuration": {
+		
+	}
+	
+}
